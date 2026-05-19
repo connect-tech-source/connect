@@ -45,19 +45,14 @@ export default function Footer() {
           </div>
 
           {/* Right — nav columns */}
-          <nav className="flex flex-row justify-between gap-10 md:gap-20">
+          <nav className="grid grid-cols-2 gap-x-10 gap-y-6 md:flex md:flex-row md:gap-20">
             {NAV_COLUMNS.map((col, ci) => (
               <ul key={ci} className="flex flex-col gap-6">
                 {col.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-white/50 transition-opacity duration-200 hover:text-white/90 whitespace-nowrap"
-                      style={{
-                        fontSize: 16,
-                        fontWeight: 400,
-                        lineHeight: "100%",
-                      }}
+                      className="text-white/50 text-base font-normal leading-none transition-opacity duration-200 hover:text-white/90 whitespace-nowrap"
                     >
                       {link.label}
                     </a>
