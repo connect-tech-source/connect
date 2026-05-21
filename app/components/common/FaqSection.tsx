@@ -11,7 +11,7 @@ interface FaqItem {
 
 interface FaqSectionProps {
   title?: string;
-  faqs: FaqItem[];
+  faqs?: FaqItem[];
 }
 
 const DEFAULT_FAQS: FaqItem[] = [
