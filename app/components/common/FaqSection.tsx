@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, X } from "lucide-react";
+import { Plus } from "lucide-react";
 
 interface FaqItem {
   id: number;
@@ -57,9 +57,9 @@ export default function FaqSection({ title = "Frequently Asked Questions", faqs 
       {/* Top divider */}
       <div className="h-px w-full bg-white/10" />
 
-      <div className="relative z-10 px-[14px] py-[40px] pt-[80px] md:px-[130px] md:pt-[200px]">
+      <div className="relative z-10 px-[14px] py-[40px] pt-[40px] md:px-[130px] md:pt-[80px]">
         {/* Heading */}
-        <div className="h-px w-full bg-white/10 mb-10" />
+        <div className="h-px -mx-[14px] md:-mx-[130px] bg-white/10 mb-10" />
         <h2
           className="text-white text-center mb-10 mt-10"
           style={{
@@ -84,25 +84,27 @@ export default function FaqSection({ title = "Frequently Asked Questions", faqs 
 
                 <button
                   onClick={() => toggle(faq.id)}
-                  className="w-full flex items-start gap-6 px-6 py-6 text-left transition-colors duration-300"
+                  className="w-full flex items-stretch gap-6 text-left transition-colors duration-300"
                   style={{ background: isOpen ? "#0285FE" : "transparent" }}
                 >
                   {/* Number */}
                   <span
-                    className="shrink-0 text-white/40 mt-0.5"
+                    className="shrink-0 flex items-center justify-center px-6"
                     style={{
                       fontFamily: "'Inter Tight', Inter, sans-serif",
                       fontWeight: 400,
                       fontSize: 20,
                       lineHeight: "100%",
                       letterSpacing: "-0.04em",
+                      color: isOpen ? "#0285FE" : "rgba(255,255,255,0.4)",
+                      background: isOpen ? "#2E3033" : "transparent",
                     }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
                   {/* Question + Answer */}
-                  <div className="flex-1 flex flex-col gap-4">
+                  <div className="flex-1 flex flex-col gap-4 py-6">
                     <span
                       className="text-white"
                       style={{
@@ -116,7 +118,10 @@ export default function FaqSection({ title = "Frequently Asked Questions", faqs 
                       {faq.question}
                     </span>
 
-                    {isOpen && (
+                    <div
+                      className="overflow-hidden transition-all duration-300 ease-in-out"
+                      style={{ maxHeight: isOpen ? "200px" : "0px", opacity: isOpen ? 1 : 0 }}
+                    >
                       <p
                         className="text-white/80"
                         style={{
@@ -129,12 +134,15 @@ export default function FaqSection({ title = "Frequently Asked Questions", faqs 
                       >
                         {faq.answer}
                       </p>
-                    )}
+                    </div>
                   </div>
 
                   {/* Icon */}
-                  <span className="shrink-0 text-white mt-0.5">
-                    {isOpen ? <X size={18} /> : <Plus size={18} />}
+                  <span
+                    className="shrink-0 text-white flex items-center pr-6 transition-transform duration-300"
+                    style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}
+                  >
+                    <Plus size={18} />
                   </span>
                 </button>
               </div>

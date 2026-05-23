@@ -136,20 +136,6 @@ export default function ContactSection() {
             description="We would love to hear from you and discuss how we can help bring your digital ideas to life. Here are the different ways you can get in touch with us."
           />
 
-          {/* Start Project button */}
-          <button
-            className="bg-white text-black font-medium transition-opacity duration-200 hover:opacity-75"
-            style={{
-              fontFamily: "'Inter Tight', Inter, sans-serif",
-              fontWeight: 500,
-              fontSize: 16,
-              padding: "8px 16px",
-              borderRadius: 2,
-            }}
-          >
-            Start Project
-          </button>
-
           {/* Form container */}
           <div className="w-full flex flex-col gap-5 md:rounded-2xl md:px-[80px] md:py-[80px] md:border md:border-white/[0.08] md:bg-white/[0.02]">
             {/* Row 1 — Full Name + Email */}
