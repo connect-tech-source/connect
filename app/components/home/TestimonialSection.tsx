@@ -9,7 +9,7 @@ interface Testimonial {
   review: string;
   name: string;
   designation: string;
-  image?: string;
+  image: string;
 }
 
 const TESTIMONIALS: Testimonial[] = [
@@ -39,10 +39,26 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
-function AvatarPlaceholder() {
+function QuoteOpen() {
   return (
-    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[#0255a8]">
-      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 opacity-60">
+    <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 18V10.8C0 7.2 1.2 4.2 3.6 1.8L5.4 0l1.8 1.2C5.4 2.8 4.4 4.6 4.2 6.6H8.4V18H0zm12 0V10.8c0-3.6 1.2-6.6 3.6-9L17.4 0l1.8 1.2c-1.8 1.6-2.8 3.4-3 5.4H20.4V18H12z" fill="black" fillOpacity="0.4"/>
+    </svg>
+  );
+}
+
+function QuoteClose() {
+  return (
+    <svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="rotate-180">
+      <path d="M0 18V10.8C0 7.2 1.2 4.2 3.6 1.8L5.4 0l1.8 1.2C5.4 2.8 4.4 4.6 4.2 6.6H8.4V18H0zm12 0V10.8c0-3.6 1.2-6.6 3.6-9L17.4 0l1.8 1.2c-1.8 1.6-2.8 3.4-3 5.4H20.4V18H12z" fill="black" fillOpacity="0.4"/>
+    </svg>
+  );
+}
+
+function FallbackImage() {
+  return (
+    <div className="w-full h-full bg-[#0265c4] flex items-center justify-center">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 opacity-30">
         <circle cx="40" cy="28" r="16" fill="white" />
         <ellipse cx="40" cy="68" rx="26" ry="16" fill="white" />
       </svg>
@@ -59,120 +75,168 @@ export default function TestimonialSection() {
   const t = TESTIMONIALS[current];
 
   return (
-    <section className="relative bg-black overflow-hidden">
+    <section className="bg-black">
       {/* Top divider */}
-      <div className="h-px w-full bg-white/10" />
+      <div className="h-px w-full bg-white/[0.08]" />
 
-      <div className="relative z-10 px-[14px] py-[40px] pt-[80px] md:px-[130px] md:pt-[200px]">
+      <div className="px-6 py-10 md:px-20 md:py-20">
         {/* Heading */}
-        <div className="h-px w-full bg-white/10 mb-10" />
         <h2
-          className="text-white text-center mb-10 mt-10"
+          className="text-white text-center mx-auto mb-8 md:mb-12 max-w-[320px] md:max-w-none"
           style={{
             fontFamily: "Manrope, sans-serif",
             fontWeight: 600,
-            fontSize: "clamp(32px, 4vw, 48px)",
-            lineHeight: "100%",
-            letterSpacing: "0em",
+            fontSize: "clamp(32px, 5vw, 64px)",
+            lineHeight: "110%",
+            letterSpacing: "-0.04em",
           }}
         >
           What Clients Say About CONNECT
         </h2>
 
-        {/* Carousel */}
-        <div className="relative w-full">
-          {/* Card — full width */}
-          <div
-            className="relative w-full flex flex-col md:flex-row overflow-hidden transition-all duration-500"
-            style={{
-              background: "linear-gradient(135deg, #027FF3 0%, #0265c4 100%)",
-              borderRadius: 24,
-              boxShadow: "0 0 60px rgba(2,127,243,0.25), inset 0 0 80px rgba(255,255,255,0.04)",
-            }}
+        {/* ── DESKTOP CARD ── */}
+        <div
+          className="hidden md:flex items-center gap-12"
+          style={{ background: "linear-gradient(135deg, #0285FE 0%, #0277E2 100%)" }}
+        >
+          {/* Left arrow */}
+          <button
+            onClick={prev}
+            className="shrink-0 pl-12 text-black hover:opacity-60 transition-opacity duration-200"
+            aria-label="Previous"
           >
-            {/* Background quote icons */}
-            <svg className="absolute top-6 left-6 opacity-[0.15] pointer-events-none" width="80" height="80" viewBox="0 0 24 24" fill="#0255a8">
-              <path d="M11.3 6C8 7.1 5.8 9.7 5.8 13v5h5.5v-5H7.8c0-2.2 1.4-4.1 3.5-4.9V6zm8 0c-3.3 1.1-5.5 3.7-5.5 7v5h5.5v-5h-3.5c0-2.2 1.4-4.1 3.5-4.9V6z"/>
-            </svg>
-            <svg className="absolute bottom-6 right-6 opacity-[0.15] pointer-events-none rotate-180" width="80" height="80" viewBox="0 0 24 24" fill="#0255a8">
-              <path d="M11.3 6C8 7.1 5.8 9.7 5.8 13v5h5.5v-5H7.8c0-2.2 1.4-4.1 3.5-4.9V6zm8 0c-3.3 1.1-5.5 3.7-5.5 7v5h5.5v-5h-3.5c0-2.2 1.4-4.1 3.5-4.9V6z"/>
-            </svg>
+            <ChevronLeft size={28} strokeWidth={2} />
+          </button>
 
-            {/* Left — content (desktop) + full card (mobile) */}
-            <div className="relative z-10 flex-1 flex flex-col gap-6 px-5 py-6 md:px-12 md:py-12 md:justify-between md:gap-10">
-              <p
-                className="text-black max-w-[520px]"
+          {/* Center — quote + user */}
+          <div className="flex-1 flex flex-col gap-8 py-12">
+            <QuoteOpen />
+            <p
+              className="text-black max-w-[520px]"
+              style={{
+                fontFamily: "'Inter Tight', Inter, sans-serif",
+                fontWeight: 400,
+                fontSize: 20,
+                lineHeight: "150%",
+                letterSpacing: "0%",
+              }}
+            >
+              {t.review}
+            </p>
+            <QuoteClose />
+
+            <div className="flex flex-col gap-1">
+              <span
+                className="text-black"
+                style={{
+                  fontFamily: "'Inter Tight', Inter, sans-serif",
+                  fontWeight: 500,
+                  fontSize: 16,
+                  lineHeight: "140%",
+                }}
+              >
+                {t.name}
+              </span>
+              <span
                 style={{
                   fontFamily: "'Inter Tight', Inter, sans-serif",
                   fontWeight: 400,
-                  fontSize: "clamp(16px, 1.5vw, 20px)",
-                  lineHeight: "150%",
-                  letterSpacing: "0em",
+                  fontSize: 14,
+                  lineHeight: "140%",
+                  color: "rgba(0,0,0,0.72)",
                 }}
               >
-                {t.review}
-              </p>
-
-              <div className="flex flex-col gap-1">
-                <span
-                  className="text-black"
-                  style={{
-                    fontFamily: "'Inter Tight', Inter, sans-serif",
-                    fontWeight: 600,
-                    fontSize: 16,
-                    lineHeight: "130%",
-                  }}
-                >
-                  {t.name}
-                </span>
-                <span
-                  className="text-black/60"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontWeight: 400,
-                    fontSize: 14,
-                    lineHeight: "130%",
-                  }}
-                >
-                  {t.designation}
-                </span>
-              </div>
-
-              {/* Mobile only — avatar or image below user details */}
-              <div className="md:hidden">
-                {t.image ? (
-                  <div className="relative w-full h-[200px] rounded-2xl overflow-hidden">
-                    <Image src={t.image} alt={t.name} fill className="object-cover" />
-                  </div>
-                ) : (
-                  <AvatarPlaceholder />
-                )}
-              </div>
-            </div>
-
-            {/* Right — image (desktop only) */}
-            <div className="hidden md:block relative w-[320px] shrink-0 rounded-r-[24px] overflow-hidden">
-              {t.image ? (
-                <Image src={t.image} alt={t.name} fill className="object-cover" />
-              ) : (
-                <AvatarPlaceholder />
-              )}
+                {t.designation}
+              </span>
             </div>
           </div>
 
-          {/* Arrows */}
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[52px] h-[52px] flex items-center justify-center rounded-full border border-white/20 text-white hover:border-white/60 transition-all duration-200 z-10"
-          >
-            <ChevronLeft size={20} />
-          </button>
+          {/* Right — image */}
+          <div className="shrink-0 w-[320px] h-[220px] relative">
+            {t.image ? (
+              <Image src={t.image} alt={t.name} fill className="object-cover" />
+            ) : (
+              <FallbackImage />
+            )}
+          </div>
+
+          {/* Right arrow */}
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-[52px] h-[52px] flex items-center justify-center rounded-full border border-white/20 text-white hover:border-white/60 transition-all duration-200 z-10"
+            className="shrink-0 pr-12 text-black hover:opacity-60 transition-opacity duration-200"
+            aria-label="Next"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={28} strokeWidth={2} />
           </button>
+        </div>
+
+        {/* ── MOBILE CARD ── */}
+        <div
+          className="flex flex-col md:hidden"
+          style={{ background: "linear-gradient(135deg, #0285FE 0%, #0277E2 100%)" }}
+        >
+          {/* Top row — arrows */}
+          <div className="flex items-center justify-between px-6 pt-6">
+            <button onClick={prev} className="text-black hover:opacity-60 transition-opacity duration-200" aria-label="Previous">
+              <ChevronLeft size={22} strokeWidth={2} />
+            </button>
+            <button onClick={next} className="text-black hover:opacity-60 transition-opacity duration-200" aria-label="Next">
+              <ChevronRight size={22} strokeWidth={2} />
+            </button>
+          </div>
+
+          {/* Quote content */}
+          <div className="flex flex-col gap-5 px-6 pt-4 pb-6">
+            <QuoteOpen />
+            <p
+              className="text-black"
+              style={{
+                fontFamily: "'Inter Tight', Inter, sans-serif",
+                fontWeight: 400,
+                fontSize: 16,
+                lineHeight: "150%",
+                letterSpacing: "0%",
+              }}
+            >
+              {t.review}
+            </p>
+            <QuoteClose />
+
+            {/* User info */}
+            <div className="flex flex-col gap-1">
+              <span
+                className="text-black"
+                style={{
+                  fontFamily: "'Inter Tight', Inter, sans-serif",
+                  fontWeight: 500,
+                  fontSize: 16,
+                  lineHeight: "140%",
+                }}
+              >
+                {t.name}
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Inter Tight', Inter, sans-serif",
+                  fontWeight: 400,
+                  fontSize: 14,
+                  lineHeight: "140%",
+                  color: "rgba(0,0,0,0.72)",
+                }}
+              >
+                {t.designation}
+              </span>
+            </div>
+          </div>
+
+          {/* Image — full width */}
+          <div className="w-full h-[260px] relative">
+            {t.image ? (
+              <Image src={t.image} alt={t.name} fill className="object-cover" />
+            ) : (
+              <FallbackImage />
+            )}
+          </div>
         </div>
 
         {/* Dots */}
@@ -181,14 +245,17 @@ export default function TestimonialSection() {
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-[#027FF3]" : "w-1.5 bg-white/30"}`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === current ? "w-6 bg-[#0285FE]" : "w-1.5 bg-white/30"
+              }`}
+              aria-label={`Go to testimonial ${i + 1}`}
             />
           ))}
         </div>
       </div>
 
       {/* Bottom divider */}
-      <div className="h-px w-full bg-white/10" />
+      <div className="h-px w-full bg-white/[0.08]" />
     </section>
   );
 }
