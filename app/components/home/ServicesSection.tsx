@@ -86,32 +86,38 @@ export default function ServicesSection() {
         </Link>
       </div>
 
-      {/* Top cards divider */}
-      <div className="h-px w-full bg-white/10" />
+      {/* Cards wrapper — padded on desktop, full border table feel */}
+      <div className="md:px-20">
+        {/* Top cards divider */}
+        <div className="h-px w-full bg-white/10" />
 
-      {/* Services grid */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-        {SERVICES.map((service, i) => (
-          <div key={service.title} className="relative">
-            <ServiceCard {...service} />
-            {/* Right divider between cards — not after last in each row */}
-            {i < SERVICES.length - 1 && (
-              <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-px bg-white/10" />
-            )}
-            {/* Tablet: right divider only for odd index */}
-            {i % 2 === 0 && (
-              <div className="hidden md:block lg:hidden absolute right-0 top-0 bottom-0 w-px bg-white/10" />
-            )}
-            {/* Mobile: bottom divider between stacked cards */}
-            {i < SERVICES.length - 1 && (
-              <div className="md:hidden h-px w-full bg-white/10" />
-            )}
-          </div>
-        ))}
+        {/* Services grid */}
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:border-l md:border-r md:border-white/10">
+          {SERVICES.map((service, i) => (
+            <div key={service.title} className="relative">
+              <ServiceCard {...service} />
+              {/* Right divider between cards — not after last in each row */}
+              {i < SERVICES.length - 1 && (
+                <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-px bg-white/10" />
+              )}
+              {/* Tablet: right divider only for odd index */}
+              {i % 2 === 0 && (
+                <div className="hidden md:block lg:hidden absolute right-0 top-0 bottom-0 w-px bg-white/10" />
+              )}
+              {/* Mobile: bottom divider between stacked cards */}
+              {i < SERVICES.length - 1 && (
+                <div className="md:hidden h-px w-full bg-white/10" />
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom cards divider */}
+        <div className="h-px w-full bg-white/10" />
       </div>
 
-      {/* Bottom cards divider */}
-      <div className="h-px w-full bg-white/10" />
+      {/* Section bottom divider — full width */}
+      <div className="h-px w-full bg-white/10 mt-[40px]" />
 
     </section>
   );

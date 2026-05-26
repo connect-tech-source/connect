@@ -16,7 +16,7 @@ const CARDS = [
   },
 ];
 
-export default function GrowthPartnerSection() {
+export default function GrowthPartnerSection({ showButton = true }: { showButton?: boolean }) {
   return (
     <section className="relative px-[14px] py-[80px] md:px-[130px] md:py-[100px] flex flex-col items-center text-center gap-6">
 
@@ -56,20 +56,22 @@ export default function GrowthPartnerSection() {
           At Connect, we combine creativity, strategy, and technology to build digital experiences that drive real business results.
         </p>
 
-        <Link
-          href="/about"
-          className="bg-white text-black font-medium transition-opacity duration-200 hover:opacity-75"
-          style={{
-            fontFamily: "'Inter Tight', Inter, sans-serif",
-            fontWeight: 500,
-            fontSize: 16,
-            height: 40,
-            padding: "8px 16px",
-            borderRadius: 2,
-          }}
-        >
-          Know more About us
-        </Link>
+        {showButton && (
+          <Link
+            href="/about"
+            className="bg-white text-black font-medium transition-opacity duration-200 hover:opacity-75"
+            style={{
+              fontFamily: "'Inter Tight', Inter, sans-serif",
+              fontWeight: 500,
+              fontSize: 16,
+              height: 40,
+              padding: "8px 16px",
+              borderRadius: 2,
+            }}
+          >
+            Know more About us
+          </Link>
+        )}
       </div>
 
       {/* Top divider */}

@@ -4,21 +4,13 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { X, ChevronDown } from "lucide-react";
+import ServicesMegaMenu from "@/app/components/navbar/ServicesMegaMenu";
+import { servicesData } from "@/data/servicesData";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Services", href: "/services", accordion: true },
   { label: "Industries", href: "/industries" },
-];
-
-const SERVICES = [
-  "UI/UX Design",
-  "Website Development",
-  "Mobile App Design",
-  "Branding & Identity",
-  "Product Strategy",
-  "SEO & Marketing",
 ];
 
 function HamburgerMenu() {
@@ -90,16 +82,16 @@ export default function Header() {
             {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
               {NAV_LINKS.map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
-                  className="flex items-center gap-1 text-white/80 hover:text-[#0285FE] transition-colors duration-200"
+                  className="text-white/80 hover:text-[#0285FE] transition-colors duration-200"
                   style={{ fontFamily: "'Inter Tight', Inter, sans-serif", fontSize: 16, fontWeight: 400, lineHeight: "100%", letterSpacing: "-0.01em" }}
                 >
                   {link.label}
-                  {link.accordion && <ChevronDown size={14} className="opacity-60" />}
-                </a>
+                </Link>
               ))}
+              <ServicesMegaMenu />
             </nav>
 
             {/* Desktop Contact button */}
@@ -171,78 +163,74 @@ export default function Header() {
         <nav className="flex flex-col flex-1 px-6 overflow-y-auto">
           {NAV_LINKS.map((link) => (
             <div key={link.label} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-              {link.accordion ? (
-                <>
-                  <button
-                    onClick={() => setServicesOpen((p) => !p)}
-                    className="w-full flex items-center justify-between py-4 text-white hover:opacity-70 transition-opacity duration-200"
+              <Link
+                href={link.href}
+                onClick={() => setDrawerOpen(false)}
+                className="flex items-center py-4 text-white hover:opacity-70 transition-opacity duration-200"
+                style={{
+                  fontFamily: "'Inter Tight', Inter, sans-serif",
+                  fontWeight: 400,
+                  fontSize: 16,
+                  lineHeight: "140%",
+                  letterSpacing: "0%",
+                }}
+              >
+                {link.label}
+              </Link>
+            </div>
+          ))}
+
+          {/* Services accordion */}
+          <div style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+            <button
+              onClick={() => setServicesOpen((p) => !p)}
+              className="w-full flex items-center justify-between py-4 text-white hover:opacity-70 transition-opacity duration-200"
+              style={{
+                fontFamily: "'Inter Tight', Inter, sans-serif",
+                fontWeight: 400,
+                fontSize: 16,
+                lineHeight: "140%",
+              }}
+            >
+              Services
+              <ChevronDown
+                size={16}
+                className="text-white transition-transform duration-300"
+                style={{ transform: servicesOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+              />
+            </button>
+
+            <div
+              className="overflow-hidden transition-all duration-300"
+              style={{ maxHeight: servicesOpen ? "400px" : "0px" }}
+            >
+              <div className="flex flex-col pb-3" style={{ paddingTop: 8, paddingBottom: 12 }}>
+                {servicesData.map((s) => (
+                  <Link
+                    key={s.slug}
+                    href={`/services/${s.slug}`}
+                    onClick={() => setDrawerOpen(false)}
+                    className="hover:opacity-100 transition-opacity duration-200"
                     style={{
                       fontFamily: "'Inter Tight', Inter, sans-serif",
                       fontWeight: 400,
                       fontSize: 16,
                       lineHeight: "140%",
-                      letterSpacing: "0%",
+                      color: "rgba(255,255,255,0.75)",
+                      paddingTop: 9,
+                      paddingBottom: 9,
                     }}
                   >
-                    {link.label}
-                    <ChevronDown
-                      size={18}
-                      className="text-white transition-transform duration-300"
-                      style={{ transform: servicesOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-                    />
-                  </button>
-
-                  {/* Accordion submenu */}
-                  <div
-                    className="overflow-hidden transition-all duration-300"
-                    style={{ maxHeight: servicesOpen ? "400px" : "0px" }}
-                  >
-                    <div className="flex flex-col pb-3" style={{ paddingTop: 20, paddingBottom: 12 }}>
-                      {SERVICES.map((s) => (
-                        <Link
-                          key={s}
-                          href="/services"
-                          onClick={() => setDrawerOpen(false)}
-                          className="hover:opacity-100 transition-opacity duration-200"
-                          style={{
-                            fontFamily: "'Inter Tight', Inter, sans-serif",
-                            fontWeight: 400,
-                            fontSize: 16,
-                            lineHeight: "140%",
-                            color: "rgba(255,255,255,0.75)",
-                            paddingTop: 9,
-                            paddingBottom: 9,
-                          }}
-                        >
-                          {s}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <Link
-                  href={link.href}
-                  onClick={() => setDrawerOpen(false)}
-                  className="flex items-center py-4 text-white hover:opacity-70 transition-opacity duration-200"
-                  style={{
-                    fontFamily: "'Inter Tight', Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: 16,
-                    lineHeight: "140%",
-                    letterSpacing: "0%",
-                  }}
-                >
-                  {link.label}
-                </Link>
-              )}
+                    {s.title}
+                  </Link>
+                ))}
+              </div>
             </div>
-          ))}
+          </div>
         </nav>
 
         {/* Bottom section */}
         <div className="px-6 pb-10 flex flex-col gap-6" style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 24 }}>
-          {/* Contact us */}
           <Link
             href="/contact"
             onClick={() => setDrawerOpen(false)}
@@ -257,7 +245,6 @@ export default function Header() {
             Contact us
           </Link>
 
-          {/* Social icons */}
           <div className="flex items-center gap-3">
             {[
               { icon: <LinkedInIcon />, href: "https://linkedin.com", label: "LinkedIn" },
