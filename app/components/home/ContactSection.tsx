@@ -125,10 +125,10 @@ export default function ContactSection() {
       {/* Top divider */}
       <div className="h-px w-full bg-white/10" />
 
-      <div className="relative z-10 px-[14px] py-[40px] pt-[80px] md:px-[130px] md:pt-[200px]">
+      <div className="relative z-10 px-[14px] py-[40px] pt-[100px] md:px-[130px] md:pt-[100px]">
 
         {/* Divider + heading */}
-        <div className="h-px w-full bg-white/10 mb-10" />
+        <div className="h-px -mx-[14px] md:-mx-[130px] bg-white/10 mb-10" />
 
         <div className="flex flex-col items-center gap-8">
           <SectionHeader

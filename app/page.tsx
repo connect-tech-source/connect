@@ -7,15 +7,32 @@ import FaqSection from "./components/common/FaqSection";
 import ContactSection from "./components/home/ContactSection";
 
 export const metadata: Metadata = {
-  title: "Connect Technologies — We Build Digital Products That Drive Real Growth",
+  title: "Connect Technologies | Best Digital Agency in India",
   description:
-    "Connect Technologies helps startups and businesses transform ideas into powerful digital products through strategy, design, and development.",
+    "Connect Technologies builds world-class digital products for startups and businesses. Expert UI/UX design, web development, mobile apps, and branding. Get started today.",
+  keywords: [
+    "Connect Technologies",
+    "Connect",
+    "digital agency India",
+    "web development India",
+    "UI UX design India",
+    "mobile app development",
+    "branding agency",
+    "startup agency India",
+  ],
   alternates: { canonical: "https://www.connecttechnologies.in" },
   openGraph: {
     url: "https://www.connecttechnologies.in",
-    title: "Connect Technologies — We Build Digital Products That Drive Real Growth",
+    title: "Connect Technologies | Best Digital Agency in India",
     description:
-      "Connect Technologies helps startups and businesses transform ideas into powerful digital products through strategy, design, and development.",
+      "Connect Technologies builds world-class digital products. Expert UI/UX, web development, mobile apps, and branding for startups and enterprises.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Connect Technologies" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Connect Technologies | Best Digital Agency in India",
+    description: "Expert UI/UX, web development, mobile apps, and branding for startups and enterprises.",
+    images: ["/og-image.png"],
   },
 };
 
