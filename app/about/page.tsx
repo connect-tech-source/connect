@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <main className="bg-black">
+    <main className="bg-black overflow-hidden">
       <HeroSection />
       <WhyConnectSection />
       <OurValuesSection />
