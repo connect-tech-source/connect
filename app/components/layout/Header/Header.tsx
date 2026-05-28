@@ -69,7 +69,7 @@ export default function Header() {
             style={{ background: "rgba(0,0,0,1)", backdropFilter: "blur(20px)" }}
           >
             {/* Logo */}
-            <div className="relative w-[120px] h-[36px]">
+            <Link href="/" className="relative w-[120px] h-[36px] block">
               <Image
                 src="/HeaderLogo.png"
                 alt="Connect"
@@ -77,7 +77,7 @@ export default function Header() {
                 className="object-contain object-left"
                 priority
               />
-            </div>
+            </Link>
 
             {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
@@ -95,12 +95,13 @@ export default function Header() {
             </nav>
 
             {/* Desktop Contact button */}
-            <button
+            <Link
+              href="/contact"
               className="hidden md:block bg-white text-black text-sm font-medium px-5 py-2 transition-opacity duration-200 hover:opacity-75"
               style={{ borderRadius: 2 }}
             >
               Contact Us
-            </button>
+            </Link>
 
             {/* Mobile hamburger */}
             <button
@@ -121,7 +122,7 @@ export default function Header() {
         className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${
           drawerOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
-        style={{ background: "rgba(0,0,0,0.5)" }}
+        style={{ background: "rgba(0,0,0,0.5)", backdropFilter: drawerOpen ? "blur(6px)" : "none" }}
         onClick={() => setDrawerOpen(false)}
       />
 

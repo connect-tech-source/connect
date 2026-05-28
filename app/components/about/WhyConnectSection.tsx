@@ -35,7 +35,7 @@ const FEATURES = [
 
 export default function WhyConnectSection() {
   return (
-    <section className="w-full bg-[#0285FE] flex flex-col md:flex-row gap-10 p-6 md:p-20">
+    <section className="w-full bg-[#0285FE] flex flex-col md:flex-row gap-10 p-6 md:p-20 md:items-stretch">
       {/* Left */}
       <div className="md:w-1/2 flex flex-col">
         <h2
@@ -52,19 +52,19 @@ export default function WhyConnectSection() {
           Why CONNECT ?
         </h2>
 
-        <div className="w-full flex-1 relative">
+        <div className="w-full flex-1 relative min-h-[300px]">
           <Image
             src="/WhyConnectImage.png"
             alt="Why Connect"
             width={600}
             height={500}
-            className="w-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
       </div>
 
       {/* Right */}
-      <div className="md:w-1/2 flex flex-col">
+      <div className="md:w-1/2 flex flex-col justify-between">
         {FEATURES.map((feature, i) => (
           <div key={feature.title}>
             <div className="flex flex-col gap-4 py-4">
