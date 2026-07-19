@@ -3,45 +3,40 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Paintbrush, Monitor, Smartphone, PenTool } from "lucide-react";
-import ServiceCard from "../ui/ServiceCard";
 import RevealText from "../ui/RevealText";
 import Reveal from "../ui/Reveal";
-import { StaggerGroup, StaggerItem } from "../ui/StaggerGrid";
+import ServicesStack from "./services-stack/ServicesStack";
 
 const SERVICES = [
   {
-    icon: <Paintbrush size={22} color="#0285FE" />,
+    icon: <Paintbrush color="#0285FE" strokeWidth={1.5} />,
     title: "UI/UX Design",
     description:
       "We craft intuitive and visually stunning interfaces that deliver seamless user experiences and drive engagement across all platforms.",
-    href: "/services",
   },
   {
-    icon: <Monitor size={22} color="#0285FE" />,
+    icon: <Monitor color="#0285FE" strokeWidth={1.5} />,
     title: "Website Development",
     description:
       "From landing pages to complex web apps, we build fast, scalable, and modern websites tailored to your business needs.",
-    href: "/services",
   },
   {
-    icon: <Smartphone size={22} color="#0285FE" />,
+    icon: <Smartphone color="#0285FE" strokeWidth={1.5} />,
     title: "Mobile App",
     description:
       "We develop high-performance iOS and Android applications that provide smooth experiences and solve real user problems.",
-    href: "/services",
   },
   {
-    icon: <PenTool size={22} color="#0285FE" />,
+    icon: <PenTool color="#0285FE" strokeWidth={1.5} />,
     title: "Branding",
     description:
       "We build powerful brand identities that communicate your values, stand out in the market, and leave a lasting impression.",
-    href: "/services",
   },
 ];
 
 export default function ServicesSection() {
   return (
-    <section className="relative bg-black overflow-hidden">
+    <section className="relative bg-black">
 
       {/* Top divider */}
       <div className="h-px w-full bg-white/10" />
@@ -97,38 +92,11 @@ export default function ServicesSection() {
         </Reveal>
       </div>
 
-      {/* Cards wrapper — padded on desktop, full border table feel */}
-      <div className="md:px-20">
-        {/* Top cards divider */}
-        <div className="h-px w-full bg-white/10" />
-
-        {/* Services grid */}
-        <StaggerGroup className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:border-l md:border-r md:border-white/10">
-          {SERVICES.map((service, i) => (
-            <StaggerItem key={service.title} className="relative">
-              <ServiceCard {...service} />
-              {/* Right divider between cards — not after last in each row */}
-              {i < SERVICES.length - 1 && (
-                <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-px bg-white/10" />
-              )}
-              {/* Tablet: right divider only for odd index */}
-              {i % 2 === 0 && (
-                <div className="hidden md:block lg:hidden absolute right-0 top-0 bottom-0 w-px bg-white/10" />
-              )}
-              {/* Mobile: bottom divider between stacked cards */}
-              {i < SERVICES.length - 1 && (
-                <div className="md:hidden h-px w-full bg-white/10" />
-              )}
-            </StaggerItem>
-          ))}
-        </StaggerGroup>
-
-        {/* Bottom cards divider */}
-        <div className="h-px w-full bg-white/10" />
-      </div>
+      {/* Scroll-pinned card stack */}
+      <ServicesStack services={SERVICES} />
 
       {/* Section bottom divider — full width */}
-      <div className="h-px w-full bg-white/10 mt-[40px]" />
+      <div className="h-px w-full bg-white/10" />
 
     </section>
   );
