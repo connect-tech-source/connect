@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Paintbrush, Monitor, Smartphone, PenTool } from "lucide-react";
 import ServiceCard from "../ui/ServiceCard";
+import RevealText from "../ui/RevealText";
+import Reveal from "../ui/Reveal";
+import { StaggerGroup, StaggerItem } from "../ui/StaggerGrid";
 
 const SERVICES = [
   {
@@ -44,7 +48,8 @@ export default function ServicesSection() {
 
       {/* Section content */}
       <div className="relative z-10 flex flex-col items-center text-center gap-4 md:gap-6 px-[14px] py-[40px] md:px-[130px]">
-        <h2
+        <RevealText
+          as="h2"
           className="text-white"
           style={{
             fontFamily: "Manrope, sans-serif",
@@ -55,35 +60,41 @@ export default function ServicesSection() {
           }}
         >
           Our Services
-        </h2>
+        </RevealText>
 
-        <p
-          className="text-white/50 max-w-[520px]"
-          style={{
-            fontFamily: "'Inter Tight', Inter, sans-serif",
-            fontWeight: 400,
-            fontSize: "clamp(14px, 1.3vw, 18px)",
-            lineHeight: "24px",
-            letterSpacing: "-0.006em",
-          }}
-        >
-          Transform your brand with our innovative digital solutions that captivate and engage your audience.
-        </p>
+        <Reveal delay={0.25}>
+          <p
+            className="text-white/50 max-w-[520px]"
+            style={{
+              fontFamily: "'Inter Tight', Inter, sans-serif",
+              fontWeight: 400,
+              fontSize: "clamp(14px, 1.3vw, 18px)",
+              lineHeight: "24px",
+              letterSpacing: "-0.006em",
+            }}
+          >
+            Transform your brand with our innovative digital solutions that captivate and engage your audience.
+          </p>
+        </Reveal>
 
-        <Link
-          href="/services"
-          className="bg-white text-black font-medium transition-opacity duration-200 hover:opacity-75"
-          style={{
-            fontFamily: "'Inter Tight', Inter, sans-serif",
-            fontWeight: 500,
-            fontSize: 16,
-            lineHeight: "24px",
-            padding: "8px 16px",
-            borderRadius: 2,
-          }}
-        >
-          Show all
-        </Link>
+        <Reveal delay={0.35}>
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+            <Link
+              href="/services"
+              className="inline-block bg-white text-black font-medium transition-opacity duration-200 hover:opacity-75"
+              style={{
+                fontFamily: "'Inter Tight', Inter, sans-serif",
+                fontWeight: 500,
+                fontSize: 16,
+                lineHeight: "24px",
+                padding: "8px 16px",
+                borderRadius: 2,
+              }}
+            >
+              Show all
+            </Link>
+          </motion.div>
+        </Reveal>
       </div>
 
       {/* Cards wrapper — padded on desktop, full border table feel */}
@@ -92,9 +103,9 @@ export default function ServicesSection() {
         <div className="h-px w-full bg-white/10" />
 
         {/* Services grid */}
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:border-l md:border-r md:border-white/10">
+        <StaggerGroup className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:border-l md:border-r md:border-white/10">
           {SERVICES.map((service, i) => (
-            <div key={service.title} className="relative">
+            <StaggerItem key={service.title} className="relative">
               <ServiceCard {...service} />
               {/* Right divider between cards — not after last in each row */}
               {i < SERVICES.length - 1 && (
@@ -108,9 +119,9 @@ export default function ServicesSection() {
               {i < SERVICES.length - 1 && (
                 <div className="md:hidden h-px w-full bg-white/10" />
               )}
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
 
         {/* Bottom cards divider */}
         <div className="h-px w-full bg-white/10" />

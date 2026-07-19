@@ -26,7 +26,9 @@ export default function IndustryCard({ title, description, icon }: Industry) {
       }}
     >
       {/* Icon */}
-      <div className="shrink-0">{icon}</div>
+      <div className="shrink-0 transition-transform duration-300 ease-out group-hover:scale-110 group-hover:-rotate-6">
+        {icon}
+      </div>
 
       {/* Gap between icon and heading */}
       <div className="mt-10 flex flex-col gap-4">

@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
+import RevealText from "../ui/RevealText";
+import { StaggerGroup, StaggerItem } from "../ui/StaggerGrid";
 
 interface FaqItem {
   id: number;
@@ -60,7 +63,8 @@ export default function FaqSection({ title = "Frequently Asked Questions", faqs 
       <div className="relative z-10 px-[14px] py-[40px] pt-[40px] md:px-[130px] md:pt-[80px]">
         {/* Heading */}
         <div className="h-px -mx-[14px] md:-mx-[130px] bg-white/10 mb-10" />
-        <h2
+        <RevealText
+          as="h2"
           className="text-white text-center mb-10 mt-10"
           style={{
             fontFamily: "Manrope, sans-serif",
@@ -71,19 +75,20 @@ export default function FaqSection({ title = "Frequently Asked Questions", faqs 
           }}
         >
           {title}
-        </h2>
+        </RevealText>
 
         {/* Accordion */}
-        <div className="flex flex-col">
+        <StaggerGroup className="flex flex-col">
           {faqs.map((faq, i) => {
             const isOpen = openId === faq.id;
             return (
-              <div key={faq.id}>
+              <StaggerItem key={faq.id}>
                 {/* Divider above each item */}
                 <div className="h-px w-full bg-white/10" />
 
-                <button
+                <motion.button
                   onClick={() => toggle(faq.id)}
+                  whileHover={!isOpen ? { backgroundColor: "rgba(255,255,255,0.04)" } : {}}
                   className="w-full flex items-stretch gap-6 text-left transition-colors duration-300"
                   style={{ background: isOpen ? "#0285FE" : "transparent" }}
                 >
@@ -144,14 +149,14 @@ export default function FaqSection({ title = "Frequently Asked Questions", faqs 
                   >
                     <Plus size={18} />
                   </span>
-                </button>
-              </div>
+                </motion.button>
+              </StaggerItem>
             );
           })}
 
           {/* Bottom divider of last item */}
           <div className="h-px w-full bg-white/10" />
-        </div>
+        </StaggerGroup>
       </div>
 
       {/* Bottom divider */}

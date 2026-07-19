@@ -1,3 +1,9 @@
+"use client";
+
+import { motion } from "framer-motion";
+import RevealText from "../ui/RevealText";
+import { StaggerGroup, StaggerItem } from "../ui/StaggerGrid";
+
 const VALUES = [
   {
     number: "01",
@@ -33,7 +39,8 @@ export default function OurValuesSection() {
         <div className="h-px -mx-10 md:-mx-[100px] bg-white/[0.08]" />
 
         <div className="py-10 flex justify-center">
-          <h2
+          <RevealText
+            as="h2"
             className="text-white text-center"
             style={{
               fontFamily: "Manrope, sans-serif",
@@ -44,58 +51,65 @@ export default function OurValuesSection() {
             }}
           >
             Our Values
-          </h2>
+          </RevealText>
         </div>
       </div>
 
       {/* Cards grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 border-l border-t border-white/[0.08]">
+      <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 border-l border-t border-white/[0.08]">
         {VALUES.map((value) => (
-          <div
-            key={value.number}
-            className="flex flex-col gap-4 p-10 border-r border-b border-white/[0.08]"
-          >
-            <span
-              style={{
-                fontFamily: "'Inter Tight', Inter, sans-serif",
-                fontWeight: 400,
-                fontSize: 24,
-                lineHeight: "150%",
-                letterSpacing: "0%",
-                color: "#0285FE",
-              }}
+          <StaggerItem key={value.number}>
+            <motion.div
+              whileHover={{ backgroundColor: "rgba(2,133,254,0.05)" }}
+              transition={{ duration: 0.3 }}
+              className="flex flex-col gap-4 p-10 border-r border-b border-white/[0.08] h-full"
             >
-              {value.number}
-            </span>
+              <motion.span
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="w-fit"
+                style={{
+                  fontFamily: "'Inter Tight', Inter, sans-serif",
+                  fontWeight: 400,
+                  fontSize: 24,
+                  lineHeight: "150%",
+                  letterSpacing: "0%",
+                  color: "#0285FE",
+                }}
+              >
+                {value.number}
+              </motion.span>
 
-            <h3
-              className="text-white"
-              style={{
-                fontFamily: "'Inter Tight', Inter, sans-serif",
-                fontWeight: 600,
-                fontSize: 24,
-                lineHeight: "140%",
-                letterSpacing: "0%",
-              }}
-            >
-              {value.title}
-            </h3>
+              <h3
+                className="text-white"
+                style={{
+                  fontFamily: "'Inter Tight', Inter, sans-serif",
+                  fontWeight: 600,
+                  fontSize: 24,
+                  lineHeight: "140%",
+                  letterSpacing: "0%",
+                }}
+              >
+                {value.title}
+              </h3>
 
-            <p
-              style={{
-                fontFamily: "'Inter Tight', Inter, sans-serif",
-                fontWeight: 400,
-                fontSize: 16,
-                lineHeight: "150%",
-                letterSpacing: "-0.04em",
-                color: "rgba(255,255,255,0.65)",
-              }}
-            >
-              {value.description}
-            </p>
-          </div>
+              <p
+                style={{
+                  fontFamily: "'Inter Tight', Inter, sans-serif",
+                  fontWeight: 400,
+                  fontSize: 16,
+                  lineHeight: "150%",
+                  letterSpacing: "-0.04em",
+                  color: "rgba(255,255,255,0.65)",
+                }}
+              >
+                {value.description}
+              </p>
+            </motion.div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerGroup>
 
       {/* Bottom divider */}
       <div className="h-px -mx-10 md:-mx-[100px] bg-white/[0.08] mt-10" />

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { servicesData } from "@/data/servicesData";
 import FaqSection from "../components/common/FaqSection";
 import ContactSection from "../components/home/ContactSection";
+import RevealText from "../components/ui/RevealText";
+import Reveal from "../components/ui/Reveal";
+import ServicesGrid from "./ServicesGrid";
 
 export const metadata: Metadata = {
   title: "Our Services | UI/UX, Web, Mobile App & Branding",
@@ -42,7 +43,8 @@ export default function ServicesPage() {
 
         {/* Heading */}
         <div className="flex flex-col gap-6 mb-[50px] md:mb-[80px]">
-          <h1
+          <RevealText
+            as="h1"
             className="text-white"
             style={{
               fontFamily: "Manrope, sans-serif",
@@ -53,64 +55,25 @@ export default function ServicesPage() {
             }}
           >
             Our Services
-          </h1>
-          <p
-            className="max-w-[520px]"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 400,
-              fontSize: 16,
-              lineHeight: "160%",
-              color: "rgba(255,255,255,0.65)",
-            }}
-          >
-            We combine strategy, design, and technology to build digital experiences that drive real business results.
-          </p>
+          </RevealText>
+          <Reveal delay={0.3}>
+            <p
+              className="max-w-[520px]"
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 400,
+                fontSize: 16,
+                lineHeight: "160%",
+                color: "rgba(255,255,255,0.65)",
+              }}
+            >
+              We combine strategy, design, and technology to build digital experiences that drive real business results.
+            </p>
+          </Reveal>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-white/[0.08]">
-          {servicesData.map((service) => (
-            <Link
-              key={service.slug}
-              href={`/services/${service.slug}`}
-              className="group relative flex flex-col border-r border-b border-white/[0.08] transition-all duration-300 hover:-translate-y-0.5"
-              style={{ padding: 40, minHeight: 260 }}
-            >
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                style={{ background: "rgba(2,133,254,0.04)" }}
-              />
-              <div className="relative z-10 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(2,133,254,0.6)]">
-                {service.icon}
-              </div>
-              <div className="mt-10 flex flex-col gap-4 relative z-10">
-                <h2
-                  className="text-white"
-                  style={{
-                    fontFamily: "'Inter Tight', Inter, sans-serif",
-                    fontWeight: 500,
-                    fontSize: 22,
-                    lineHeight: "100%",
-                  }}
-                >
-                  {service.title}
-                </h2>
-                <p
-                  style={{
-                    fontFamily: "'Inter Tight', Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: 14,
-                    lineHeight: "180%",
-                    color: "rgba(255,255,255,0.65)",
-                  }}
-                >
-                  {service.description}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <ServicesGrid />
       </section>
     </main>
 
