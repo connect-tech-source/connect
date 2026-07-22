@@ -1,7 +1,11 @@
+import RevealText from "../ui/RevealText";
+import Reveal from "../ui/Reveal";
+
 export default function ContactHero() {
   return (
     <div className="flex flex-col items-center text-center gap-6 md:gap-10">
-      <h1
+      <RevealText
+        as="h1"
         className="text-white"
         style={{
           fontFamily: "Manrope, sans-serif",
@@ -12,9 +16,11 @@ export default function ContactHero() {
         }}
       >
         Contact us
-      </h1>
+      </RevealText>
 
-      <h2
+      <RevealText
+        as="h2"
+        delay={0.25}
         className="text-white"
         style={{
           fontFamily: "Manrope, sans-serif",
@@ -25,22 +31,24 @@ export default function ContactHero() {
         }}
       >
         Let&apos;s Build Something Great Together
-      </h2>
+      </RevealText>
 
-      <p
-        className="max-w-[700px]"
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 400,
-          fontSize: 16,
-          lineHeight: "100%",
-          letterSpacing: "-0.03em",
-          color: "rgba(255,255,255,0.65)",
-          textAlign: "center",
-        }}
-      >
-        Have a project in mind or need help bringing your ideas to life? We&apos;d love to hear from you.
-      </p>
+      <Reveal delay={0.5}>
+        <p
+          className="max-w-[700px]"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontWeight: 400,
+            fontSize: 16,
+            lineHeight: "100%",
+            letterSpacing: "-0.03em",
+            color: "rgba(255,255,255,0.65)",
+            textAlign: "center",
+          }}
+        >
+          Have a project in mind or need help bringing your ideas to life? We&apos;d love to hear from you.
+        </p>
+      </Reveal>
     </div>
   );
 }

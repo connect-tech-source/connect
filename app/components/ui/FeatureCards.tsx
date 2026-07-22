@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { StaggerGroup, StaggerItem } from "./StaggerGrid";
 
 interface Card {
   image: string;
@@ -12,10 +13,15 @@ interface FeatureCardsProps {
 
 export default function FeatureCards({ cards }: FeatureCardsProps) {
   return (
-    <div className="relative z-10 flex flex-col md:flex-row w-full">
-      <div className="flex flex-col gap-6 text-left flex-1" style={{ padding: "50px 50px" }}>
+    <StaggerGroup className="relative z-10 flex flex-col md:flex-row w-full">
+      <StaggerItem className="group flex flex-col gap-6 text-left flex-1" style={{ padding: "50px 50px" }}>
         <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-          <Image src={cards[0].image} alt={cards[0].heading} fill className="object-cover" />
+          <Image
+            src={cards[0].image}
+            alt={cards[0].heading}
+            fill
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          />
         </div>
         <h3
           className="text-white"
@@ -29,15 +35,20 @@ export default function FeatureCards({ cards }: FeatureCardsProps) {
         >
           {cards[0].description}
         </p>
-      </div>
+      </StaggerItem>
 
       {/* Center divider — absolute so it ignores card padding and touches top/bottom dividers */}
       <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-white/10" />
       <div className="md:hidden h-px w-full bg-white/10" />
 
-      <div className="flex flex-col gap-6 text-left flex-1" style={{ padding: "50px 50px" }}>
+      <StaggerItem className="group flex flex-col gap-6 text-left flex-1" style={{ padding: "50px 50px" }}>
         <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-          <Image src={cards[1].image} alt={cards[1].heading} fill className="object-cover" />
+          <Image
+            src={cards[1].image}
+            alt={cards[1].heading}
+            fill
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          />
         </div>
         <h3
           className="text-white"
@@ -51,7 +62,7 @@ export default function FeatureCards({ cards }: FeatureCardsProps) {
         >
           {cards[1].description}
         </p>
-      </div>
-    </div>
+      </StaggerItem>
+    </StaggerGroup>
   );
 }

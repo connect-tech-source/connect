@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="bg-black text-white overflow-hidden">
+    <main className="bg-black text-white">
 
       {/* ── HERO SECTION ── */}
       <HeroSection />

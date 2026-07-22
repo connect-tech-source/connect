@@ -1,5 +1,10 @@
+"use client";
+
 import { MapPin, Mail, Phone } from "lucide-react";
 import { ReactNode } from "react";
+import { motion } from "framer-motion";
+import Reveal from "../ui/Reveal";
+import { StaggerGroup, StaggerItem } from "../ui/StaggerGrid";
 
 const CONTACT_DETAILS: { icon: ReactNode; text: string }[] = [
   {
@@ -18,7 +23,11 @@ const CONTACT_DETAILS: { icon: ReactNode; text: string }[] = [
 
 export default function ContactCard() {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className="relative w-full max-w-[1100px] mx-auto overflow-hidden"
       style={{
         background: "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)",
@@ -89,41 +98,45 @@ export default function ContactCard() {
             Office
           </span>
 
-          <div className="flex flex-col gap-6">
+          <StaggerGroup className="flex flex-col gap-6">
             {CONTACT_DETAILS.map(({ icon, text }) => (
-              <div key={text} className="flex items-center gap-4">
-                {/* Icon container */}
-                <div
-                  className="shrink-0 flex items-center justify-center text-white/70"
-                  style={{
-                    width: 40,
-                    height: 40,
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: 8,
-                    background: "rgba(255,255,255,0.03)",
-                  }}
-                >
-                  {icon}
-                </div>
+              <StaggerItem key={text}>
+                <motion.div whileHover={{ x: 4 }} transition={{ duration: 0.25 }} className="flex items-center gap-4">
+                  {/* Icon container */}
+                  <motion.div
+                    whileHover={{ scale: 1.1, borderColor: "rgba(2,133,254,0.5)", color: "#0285FE" }}
+                    transition={{ duration: 0.25 }}
+                    className="shrink-0 flex items-center justify-center text-white/70"
+                    style={{
+                      width: 40,
+                      height: 40,
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      borderRadius: 8,
+                      background: "rgba(255,255,255,0.03)",
+                    }}
+                  >
+                    {icon}
+                  </motion.div>
 
-                {/* Text */}
-                <span
-                  className="text-white break-all"
-                  style={{
-                    fontFamily: "'Inter Tight', Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: "clamp(14px, 1.5vw, 20px)",
-                    lineHeight: "140%",
-                    letterSpacing: "0px",
-                  }}
-                >
-                  {text}
-                </span>
-              </div>
+                  {/* Text */}
+                  <span
+                    className="text-white break-all"
+                    style={{
+                      fontFamily: "'Inter Tight', Inter, sans-serif",
+                      fontWeight: 400,
+                      fontSize: "clamp(14px, 1.5vw, 20px)",
+                      lineHeight: "140%",
+                      letterSpacing: "0px",
+                    }}
+                  >
+                    {text}
+                  </span>
+                </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

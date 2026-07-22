@@ -1,5 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import FeatureCards from "../ui/FeatureCards";
+import RevealText from "../ui/RevealText";
+import Reveal from "../ui/Reveal";
 
 const CARDS = [
   {
@@ -30,7 +35,8 @@ export default function GrowthPartnerSection({ showButton = true }: { showButton
       />
 
       <div className="relative z-10 flex flex-col items-center gap-6">
-        <h2
+        <RevealText
+          as="h2"
           className="text-white max-w-[780px]"
           style={{
             fontFamily: "Manrope, sans-serif",
@@ -41,36 +47,42 @@ export default function GrowthPartnerSection({ showButton = true }: { showButton
           }}
         >
           We&apos;re More Than an Agency — We&apos;re Your Growth Partner
-        </h2>
+        </RevealText>
 
-        <p
-          className="text-white/60 max-w-[580px]"
-          style={{
-            fontFamily: "'Inter Tight', Inter, sans-serif",
-            fontWeight: 400,
-            fontSize: "clamp(12px, 1.3vw, 18px)",
-            lineHeight: "24px",
-            letterSpacing: "-0.006em",
-          }}
-        >
-          At Connect, we combine creativity, strategy, and technology to build digital experiences that drive real business results.
-        </p>
-
-        {showButton && (
-          <Link
-            href="/about"
-            className="bg-white text-black font-medium transition-opacity duration-200 hover:opacity-75"
+        <Reveal delay={0.3}>
+          <p
+            className="text-white/60 max-w-[580px]"
             style={{
               fontFamily: "'Inter Tight', Inter, sans-serif",
-              fontWeight: 500,
-              fontSize: 16,
-              height: 40,
-              padding: "8px 16px",
-              borderRadius: 2,
+              fontWeight: 400,
+              fontSize: "clamp(12px, 1.3vw, 18px)",
+              lineHeight: "24px",
+              letterSpacing: "-0.006em",
             }}
           >
-            Know more About us
-          </Link>
+            At Connect, we combine creativity, strategy, and technology to build digital experiences that drive real business results.
+          </p>
+        </Reveal>
+
+        {showButton && (
+          <Reveal delay={0.4}>
+            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+              <Link
+                href="/about"
+                className="inline-block bg-white text-black font-medium transition-opacity duration-200 hover:opacity-75"
+                style={{
+                  fontFamily: "'Inter Tight', Inter, sans-serif",
+                  fontWeight: 500,
+                  fontSize: 16,
+                  height: 40,
+                  padding: "8px 16px",
+                  borderRadius: 2,
+                }}
+              >
+                Know more About us
+              </Link>
+            </motion.div>
+          </Reveal>
         )}
       </div>
 

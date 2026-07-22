@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { servicesData } from "@/data/servicesData";
+import RevealText from "../../components/ui/RevealText";
+import Reveal from "../../components/ui/Reveal";
+import { StaggerGroup, StaggerItem } from "../../components/ui/StaggerGrid";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -52,11 +55,15 @@ export default async function ServiceDetailPage({ params }: Props) {
 
         {/* Hero */}
         <div className="flex flex-col gap-8 max-w-[760px]">
-          <div className="transition-all duration-300 drop-shadow-[0_0_12px_rgba(2,133,254,0.4)]">
-            {service.icon}
-          </div>
+          <Reveal>
+            <div className="transition-all duration-300 drop-shadow-[0_0_12px_rgba(2,133,254,0.4)] w-fit">
+              {service.icon}
+            </div>
+          </Reveal>
 
-          <h1
+          <RevealText
+            as="h1"
+            delay={0.1}
             className="text-white"
             style={{
               fontFamily: "Manrope, sans-serif",
@@ -67,33 +74,37 @@ export default async function ServiceDetailPage({ params }: Props) {
             }}
           >
             {service.title}
-          </h1>
+          </RevealText>
 
-          <p
-            style={{
-              fontFamily: "'Inter Tight', Inter, sans-serif",
-              fontWeight: 400,
-              fontSize: 18,
-              lineHeight: "170%",
-              color: "rgba(255,255,255,0.65)",
-            }}
-          >
-            {service.description}
-          </p>
+          <Reveal delay={0.4}>
+            <p
+              style={{
+                fontFamily: "'Inter Tight', Inter, sans-serif",
+                fontWeight: 400,
+                fontSize: 18,
+                lineHeight: "170%",
+                color: "rgba(255,255,255,0.65)",
+              }}
+            >
+              {service.description}
+            </p>
+          </Reveal>
 
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center bg-white text-black transition-opacity duration-200 hover:opacity-75 w-fit"
-            style={{
-              fontFamily: "'Inter Tight', Inter, sans-serif",
-              fontWeight: 500,
-              fontSize: 16,
-              padding: "10px 24px",
-              borderRadius: 2,
-            }}
-          >
-            Start a Project
-          </Link>
+          <Reveal delay={0.5}>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center bg-white text-black transition-opacity duration-200 hover:opacity-75 w-fit"
+              style={{
+                fontFamily: "'Inter Tight', Inter, sans-serif",
+                fontWeight: 500,
+                fontSize: 16,
+                padding: "10px 24px",
+                borderRadius: 2,
+              }}
+            >
+              Start a Project
+            </Link>
+          </Reveal>
         </div>
 
         {/* Divider */}
@@ -101,7 +112,8 @@ export default async function ServiceDetailPage({ params }: Props) {
 
         {/* Other services */}
         <div className="flex flex-col gap-8">
-          <h2
+          <RevealText
+            as="h2"
             className="text-white"
             style={{
               fontFamily: "Manrope, sans-serif",
@@ -112,52 +124,53 @@ export default async function ServiceDetailPage({ params }: Props) {
             }}
           >
             Other Services
-          </h2>
+          </RevealText>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-white/[0.08]">
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-white/[0.08]">
             {servicesData
               .filter((s) => s.slug !== slug)
               .map((s) => (
-                <Link
-                  key={s.slug}
-                  href={`/services/${s.slug}`}
-                  className="group relative flex flex-col border-r border-b border-white/[0.08] transition-all duration-300 hover:-translate-y-0.5"
-                  style={{ padding: 32, minHeight: 200 }}
-                >
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    style={{ background: "rgba(2,133,254,0.04)" }}
-                  />
-                  <div className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(2,133,254,0.6)] transition-all duration-300">
-                    {s.icon}
-                  </div>
-                  <div className="mt-8 flex flex-col gap-3 relative z-10">
-                    <h3
-                      className="text-white"
-                      style={{
-                        fontFamily: "'Inter Tight', Inter, sans-serif",
-                        fontWeight: 500,
-                        fontSize: 20,
-                        lineHeight: "100%",
-                      }}
-                    >
-                      {s.title}
-                    </h3>
-                    <p
-                      style={{
-                        fontFamily: "'Inter Tight', Inter, sans-serif",
-                        fontWeight: 400,
-                        fontSize: 13,
-                        lineHeight: "170%",
-                        color: "rgba(255,255,255,0.55)",
-                      }}
-                    >
-                      {s.description}
-                    </p>
-                  </div>
-                </Link>
+                <StaggerItem key={s.slug}>
+                  <Link
+                    href={`/services/${s.slug}`}
+                    className="group relative flex flex-col h-full border-r border-b border-white/[0.08] transition-all duration-300 hover:-translate-y-0.5"
+                    style={{ padding: 32, minHeight: 200 }}
+                  >
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{ background: "rgba(2,133,254,0.04)" }}
+                    />
+                    <div className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(2,133,254,0.6)] group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 w-fit">
+                      {s.icon}
+                    </div>
+                    <div className="mt-8 flex flex-col gap-3 relative z-10">
+                      <h3
+                        className="text-white"
+                        style={{
+                          fontFamily: "'Inter Tight', Inter, sans-serif",
+                          fontWeight: 500,
+                          fontSize: 20,
+                          lineHeight: "100%",
+                        }}
+                      >
+                        {s.title}
+                      </h3>
+                      <p
+                        style={{
+                          fontFamily: "'Inter Tight', Inter, sans-serif",
+                          fontWeight: 400,
+                          fontSize: 13,
+                          lineHeight: "170%",
+                          color: "rgba(255,255,255,0.55)",
+                        }}
+                      >
+                        {s.description}
+                      </p>
+                    </div>
+                  </Link>
+                </StaggerItem>
               ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
     </main>

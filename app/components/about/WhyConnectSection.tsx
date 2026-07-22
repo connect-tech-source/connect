@@ -1,4 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+import RevealText from "../ui/RevealText";
+import { StaggerGroup, StaggerItem } from "../ui/StaggerGrid";
 
 const FEATURES = [
   {
@@ -38,7 +43,8 @@ export default function WhyConnectSection() {
     <section className="w-full bg-[#0285FE] flex flex-col md:flex-row gap-10 p-6 md:p-20 md:items-stretch">
       {/* Left */}
       <div className="md:w-1/2 flex flex-col">
-        <h2
+        <RevealText
+          as="h2"
           className="text-black"
           style={{
             fontFamily: "Manrope, sans-serif",
@@ -50,24 +56,34 @@ export default function WhyConnectSection() {
           }}
         >
           Why CONNECT ?
-        </h2>
+        </RevealText>
 
-        <div className="w-full flex-1 relative min-h-[300px]">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full flex-1 relative min-h-[300px] overflow-hidden"
+        >
           <Image
             src="/WhyConnectImage.png"
             alt="Why Connect"
             width={600}
             height={500}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
           />
-        </div>
+        </motion.div>
       </div>
 
       {/* Right */}
-      <div className="md:w-1/2 flex flex-col justify-between">
+      <StaggerGroup className="md:w-1/2 flex flex-col justify-between">
         {FEATURES.map((feature, i) => (
-          <div key={feature.title}>
-            <div className="flex flex-col gap-4 py-4">
+          <StaggerItem key={feature.title}>
+            <motion.div
+              whileHover={{ x: 6 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col gap-4 py-4"
+            >
               <h3
                 className="text-black"
                 style={{
@@ -92,13 +108,13 @@ export default function WhyConnectSection() {
               >
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
             {i < FEATURES.length - 1 && (
               <div className="h-px w-full bg-[#9EC1FF]" />
             )}
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerGroup>
     </section>
   );
 }

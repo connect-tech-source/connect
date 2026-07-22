@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { X, ChevronDown } from "lucide-react";
 import ServicesMegaMenu from "@/app/components/navbar/ServicesMegaMenu";
 import { servicesData } from "@/data/servicesData";
@@ -85,23 +86,26 @@ export default function Header() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="text-white/80 hover:text-[#0285FE] transition-colors duration-200"
+                  className="group relative text-white/80 hover:text-[#0285FE] transition-colors duration-200"
                   style={{ fontFamily: "'Inter Tight', Inter, sans-serif", fontSize: 16, fontWeight: 400, lineHeight: "100%", letterSpacing: "-0.01em" }}
                 >
                   {link.label}
+                  <span className="absolute left-0 -bottom-1.5 h-px w-full bg-[#0285FE] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
                 </Link>
               ))}
               <ServicesMegaMenu />
             </nav>
 
             {/* Desktop Contact button */}
-            <Link
-              href="/contact"
-              className="hidden md:block bg-white text-black text-sm font-medium px-5 py-2 transition-opacity duration-200 hover:opacity-75"
-              style={{ borderRadius: 2 }}
-            >
-              Contact Us
-            </Link>
+            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="hidden md:block">
+              <Link
+                href="/contact"
+                className="block bg-white text-black text-sm font-medium px-5 py-2 transition-opacity duration-200 hover:opacity-75"
+                style={{ borderRadius: 2 }}
+              >
+                Contact Us
+              </Link>
+            </motion.div>
 
             {/* Mobile hamburger */}
             <button

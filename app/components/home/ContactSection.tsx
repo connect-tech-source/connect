@@ -1,13 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
+import RevealText from "../ui/RevealText";
+import Reveal from "../ui/Reveal";
 
 // ── Reusable sub-components ──────────────────────────────────────────────────
 
 function SectionHeader({ heading, description }: { heading: string; description: string }) {
   return (
     <div className="flex flex-col items-center text-center" style={{ gap: 14 }}>
-      <h2
+      <RevealText
+        as="h2"
         className="text-white"
         style={{
           fontFamily: "Manrope, sans-serif",
@@ -18,20 +22,22 @@ function SectionHeader({ heading, description }: { heading: string; description:
         }}
       >
         {heading}
-      </h2>
-      <p
-        className="max-w-[620px]"
-        style={{
-          fontFamily: "'Inter Tight', Inter, sans-serif",
-          fontWeight: 400,
-          fontSize: "clamp(14px, 1.3vw, 18px)",
-          lineHeight: "24px",
-          letterSpacing: "-0.006em",
-          color: "rgba(255,255,255,0.7)",
-        }}
-      >
-        {description}
-      </p>
+      </RevealText>
+      <Reveal delay={0.3}>
+        <p
+          className="max-w-[620px]"
+          style={{
+            fontFamily: "'Inter Tight', Inter, sans-serif",
+            fontWeight: 400,
+            fontSize: "clamp(14px, 1.3vw, 18px)",
+            lineHeight: "24px",
+            letterSpacing: "-0.006em",
+            color: "rgba(255,255,255,0.7)",
+          }}
+        >
+          {description}
+        </p>
+      </Reveal>
     </div>
   );
 }
@@ -165,8 +171,12 @@ export default function ContactSection() {
           />
 
           {/* Form */}
-          <form
+          <motion.form
             onSubmit={handleSubmit}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="w-full flex flex-col gap-5 md:rounded-2xl md:px-[80px] md:py-[80px] md:border md:border-white/[0.08] md:bg-white/[0.02]"
           >
             {/* Row 1 — Full Name + Email */}
@@ -232,9 +242,11 @@ export default function ContactSection() {
 
             {/* Submit */}
             <div className="flex justify-center pt-2">
-              <button
+              <motion.button
                 type="submit"
                 disabled={submitting}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
                 className="bg-white text-black font-medium transition-opacity duration-200 hover:opacity-75 disabled:opacity-50"
                 style={{
                   fontFamily: "'Inter Tight', Inter, sans-serif",
@@ -245,9 +257,9 @@ export default function ContactSection() {
                 }}
               >
                 {submitting ? "Submitting..." : "Submit"}
-              </button>
+              </motion.button>
             </div>
-          </form>
+          </motion.form>
         </div>
       </div>
 

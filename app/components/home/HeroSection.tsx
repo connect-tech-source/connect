@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { MouseLogo } from "../../../public/svgs.js";
+import RevealText from "../ui/RevealText";
+import Reveal from "../ui/Reveal";
 
 function DownArrow() {
   return (
@@ -44,7 +47,8 @@ export default function HeroSection() {
 
       {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center gap-4 md:gap-6">
-        <h1
+        <RevealText
+          as="h1"
           className="text-white max-w-[900px]"
           style={{
             fontFamily: "Manrope, sans-serif",
@@ -57,41 +61,50 @@ export default function HeroSection() {
           }}
         >
           Your Vision, Our Expertise — Let&apos;s Build Something Exceptional Together
-        </h1>
+        </RevealText>
 
-        <p
-          className="text-white/60 max-w-[600px]"
-          style={{
-            fontFamily: "'Inter Tight', Inter, sans-serif",
-            fontWeight: 400,
-            fontSize: "clamp(14px, 1.5vw, 20px)",
-            lineHeight: "100%",
-            letterSpacing: "0em",
-            textAlign: "center",
-          }}
-        >
-          We help startups and businesses transform ideas into powerful digital products through strategy, design, and development.
-        </p>
+        <Reveal delay={0.5}>
+          <p
+            className="text-white/60 max-w-[600px]"
+            style={{
+              fontFamily: "'Inter Tight', Inter, sans-serif",
+              fontWeight: 400,
+              fontSize: "clamp(14px, 1.5vw, 20px)",
+              lineHeight: "100%",
+              letterSpacing: "0em",
+              textAlign: "center",
+            }}
+          >
+            We help startups and businesses transform ideas into powerful digital products through strategy, design, and development.
+          </p>
+        </Reveal>
 
-        <Link
-          href="/contact"
-          className="bg-white text-black font-medium transition-opacity duration-200 hover:opacity-75"
-          style={{
-            fontFamily: "'Inter Tight', Inter, sans-serif",
-            fontWeight: 500,
-            fontSize: 16,
-            lineHeight: "24px",
-            padding: "8px 16px",
-            borderRadius: 2,
-          }}
-        >
-          Start your Project
-        </Link>
+        <Reveal delay={0.65}>
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+            <Link
+              href="/contact"
+              className="inline-block bg-white text-black font-medium transition-opacity duration-200 hover:opacity-75"
+              style={{
+                fontFamily: "'Inter Tight', Inter, sans-serif",
+                fontWeight: 500,
+                fontSize: 16,
+                lineHeight: "24px",
+                padding: "8px 16px",
+                borderRadius: 2,
+              }}
+            >
+              Start your Project
+            </Link>
+          </motion.div>
+        </Reveal>
 
         {/* Scroll indicator */}
-        <button
+        <motion.button
           onClick={handleScroll}
-          className="animate-float flex flex-col items-center gap-2 mt-16 opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.6 }}
+          transition={{ delay: 1.1, duration: 0.6 }}
+          className="animate-float flex flex-col items-center gap-2 mt-16 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
           aria-label="Scroll down"
         >
           <MouseLogo width={22} height={32} color="white" />
@@ -99,7 +112,7 @@ export default function HeroSection() {
             Scroll down
           </span>
           <DownArrow />
-        </button>
+        </motion.button>
       </div>
     </section>
   );
